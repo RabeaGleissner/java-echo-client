@@ -10,6 +10,7 @@ public class FakeSocket extends Socket {
 
     private final List<String> messages;
     private ByteArrayOutputStream outputStream;
+    public boolean closed = false;
 
     public FakeSocket() {
         messages = new LinkedList<>();
@@ -31,5 +32,9 @@ public class FakeSocket extends Socket {
 
     public String printedMessage() {
         return outputStream.toString();
+    }
+
+    public void close() {
+       closed = true;
     }
 }

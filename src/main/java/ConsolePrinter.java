@@ -1,3 +1,3 @@
 public interface ConsolePrinter {
-   public void print(String message);
+   void print(String message);
 }

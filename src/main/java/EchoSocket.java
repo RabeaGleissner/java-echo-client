@@ -29,4 +29,13 @@ public class EchoSocket {
         }
         return null;
     }
+
+    public void close() {
+        try {
+            socket.close();
+        } catch (IOException e) {
+            System.out.println("could not close socket");
+            e.printStackTrace();
+        }
+    }
 }
