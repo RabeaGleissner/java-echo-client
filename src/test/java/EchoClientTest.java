@@ -46,17 +46,17 @@ public class EchoClientTest {
         assertTrue(fakeSocket.closed);
     }
 
-//    @Test
-//    public void printsUserInputUntilUserQuits() {
-//        FakeSocket fakeSocket = new FakeSocket();
-//        FakeConsoleReader fakeConsoleReader = new FakeConsoleReader();
-//        fakeConsoleReader.input("hello", "hey", "#quit");
-//        fakeSocket.input("hello", "hey", "#quit");
-//        EchoClient echoClient = new EchoClient(new EchoSocket(fakeSocket),
-//                new FakeConsolePrinter(), fakeConsoleReader);
-//
-//        echoClient.start();
-//
-//        assertTrue(fakeSocket.closed);
-//    }
+    @Test
+    public void printsUserInputUntilUserQuits() {
+        FakeSocket fakeSocket = new FakeSocket();
+        FakeConsoleReader fakeConsoleReader = new FakeConsoleReader();
+        fakeConsoleReader.input("hey\n#quit");
+        fakeSocket.input("hey\n#quit");
+        EchoClient echoClient = new EchoClient(new EchoSocket(fakeSocket),
+                new FakeConsolePrinter(), fakeConsoleReader);
+
+        echoClient.start();
+
+        assertTrue(fakeSocket.closed);
+    }
 }

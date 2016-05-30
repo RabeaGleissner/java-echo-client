@@ -20,13 +20,14 @@ public class EchoClient {
         PrintWriter serverWriter = createWriter();
         BufferedReader bufferedConsoleReader = createBufferedConsoleReader();
 
-        String userInput = "";
         try {
+            String userInput = bufferedConsoleReader.readLine();
             while (!(userInput.equals("#quit"))) {
                 sendToServer(serverWriter, userInput);
                 printMessageFromServer();
                 userInput = bufferedConsoleReader.readLine();
             }
+            sendToServer(serverWriter, "stop");
             disconnectClient();
         } catch (IOException e) {
             System.out.println("can't get any more input");
