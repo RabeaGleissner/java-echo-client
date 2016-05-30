@@ -14,7 +14,9 @@ public class EchoClientTest {
         fakeSocket.input("hello");
         EchoClient echoClient = new EchoClient(new EchoSocket(fakeSocket), fakeConsolePrinter,
                 new FakeConsoleReader());
+
         echoClient.printMessageFromServer();
+
         assertEquals("hello", fakeConsolePrinter.printed());
     }
 
@@ -24,7 +26,9 @@ public class EchoClientTest {
         FakeConsolePrinter fakeConsolePrinter = new FakeConsolePrinter();
         EchoClient echoClient = new EchoClient(new EchoSocket(fakeSocket),
                 fakeConsolePrinter, new FakeConsoleReader());
+
         echoClient.sendToServer(new PrintWriter(fakeSocket.getOutputStream(), true), "hello");
+
         assertEquals("hello\n", fakeSocket.printedMessage());
     }
 
@@ -33,9 +37,26 @@ public class EchoClientTest {
         FakeSocket fakeSocket = new FakeSocket();
         FakeConsoleReader fakeConsoleReader = new FakeConsoleReader();
         fakeConsoleReader.input("#quit");
+        fakeSocket.input("#quit");
         EchoClient echoClient = new EchoClient(new EchoSocket(fakeSocket),
                 new FakeConsolePrinter(), fakeConsoleReader);
+
         echoClient.start();
+
         assertTrue(fakeSocket.closed);
     }
+
+//    @Test
+//    public void printsUserInputUntilUserQuits() {
+//        FakeSocket fakeSocket = new FakeSocket();
+//        FakeConsoleReader fakeConsoleReader = new FakeConsoleReader();
+//        fakeConsoleReader.input("hello", "hey", "#quit");
+//        fakeSocket.input("hello", "hey", "#quit");
+//        EchoClient echoClient = new EchoClient(new EchoSocket(fakeSocket),
+//                new FakeConsolePrinter(), fakeConsoleReader);
+//
+//        echoClient.start();
+//
+//        assertTrue(fakeSocket.closed);
+//    }
 }

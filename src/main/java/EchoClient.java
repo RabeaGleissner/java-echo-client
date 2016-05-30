@@ -9,7 +9,8 @@ public class EchoClient {
     private final ConsoleReader consoleReader;
     private EchoSocket echoSocket;
 
-    public EchoClient(EchoSocket echoSocket, ConsolePrinter consolePrinter, ConsoleReader consoleReader) {
+    public EchoClient(EchoSocket echoSocket, ConsolePrinter consolePrinter,
+                      ConsoleReader consoleReader) {
         this.echoSocket = echoSocket;
         this.consolePrinter = consolePrinter;
         this.consoleReader = consoleReader;
@@ -17,13 +18,14 @@ public class EchoClient {
 
     public void start() {
         PrintWriter serverWriter = createWriter();
-        BufferedReader consoleReader = createConsoleReader();
+        BufferedReader bufferedConsoleReader = createBufferedConsoleReader();
 
-        String userInput;
+        String userInput = "";
         try {
-            while (!(userInput = consoleReader.readLine()).equals("#quit")) {
+            while (!(userInput.equals("#quit"))) {
                 sendToServer(serverWriter, userInput);
                 printMessageFromServer();
+                userInput = bufferedConsoleReader.readLine();
             }
             disconnectClient();
         } catch (IOException e) {
@@ -55,7 +57,7 @@ public class EchoClient {
         return null;
     }
 
-    private BufferedReader createConsoleReader() {
+    private BufferedReader createBufferedConsoleReader() {
         return new BufferedReader(new InputStreamReader(consoleReader.read()));
     }
 
