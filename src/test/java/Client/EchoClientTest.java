@@ -2,7 +2,6 @@ package Client;
 
 import Console.FakeConsolePrinter;
 import Console.FakeConsoleReader;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.PrintWriter;
@@ -34,7 +33,7 @@ public class EchoClientTest {
 
         echoClient.sendToServer(new PrintWriter(fakeSocket.getOutputStream(), true), "hello");
 
-        Assert.assertEquals("hello\n", fakeSocket.printedMessage());
+        assertEquals("hello\n", fakeSocket.printedMessage());
     }
 
     @Test
@@ -42,7 +41,6 @@ public class EchoClientTest {
         FakeSocket fakeSocket = new FakeSocket();
         FakeConsoleReader fakeConsoleReader = new FakeConsoleReader();
         fakeConsoleReader.input("#quit");
-        fakeSocket.input("#quit");
         EchoClient echoClient = new EchoClient(new EchoSocket(fakeSocket),
                 new FakeConsolePrinter(), fakeConsoleReader);
 
@@ -53,15 +51,18 @@ public class EchoClientTest {
 
     @Test
     public void printsUserInputUntilUserQuits() {
+        String userInput = "hey\n#quit";
         FakeSocket fakeSocket = new FakeSocket();
+        FakeConsolePrinter fakeConsolePrinter = new FakeConsolePrinter();
         FakeConsoleReader fakeConsoleReader = new FakeConsoleReader();
-        fakeConsoleReader.input("hey\n#quit");
-        fakeSocket.input("hey\n#quit");
+        fakeConsoleReader.input(userInput);
+        fakeSocket.input(userInput);
         EchoClient echoClient = new EchoClient(new EchoSocket(fakeSocket),
-                new FakeConsolePrinter(), fakeConsoleReader);
+                fakeConsolePrinter, fakeConsoleReader);
 
         echoClient.start();
 
         assertTrue(fakeSocket.closed);
+        assertEquals("[hey]", fakeConsolePrinter.printedMessages());
     }
 }

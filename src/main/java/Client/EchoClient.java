@@ -22,42 +22,41 @@ public class EchoClient {
         PrintWriter serverWriter = createWriter();
         BufferedReader bufferedConsoleReader = createBufferedConsoleReader();
 
-        try {
-            String userInput = bufferedConsoleReader.readLine();
-            while (!(userInput.equals("#quit"))) {
+        String userInput = readFromStream(bufferedConsoleReader);
+        if (userInput != null) {
+            while (!userInput.equals("#quit")) {
                 sendToServer(serverWriter, userInput);
                 printMessageFromServer();
-                userInput = bufferedConsoleReader.readLine();
+                userInput = readFromStream(bufferedConsoleReader);
             }
-            sendToServer(serverWriter, "stop");
-            disconnectClient();
-        } catch (IOException e) {
-            System.out.println("can't get any more input");
-            e.printStackTrace();
         }
+        disconnectClient(serverWriter);
     }
 
     public void printMessageFromServer() {
-        String message = readFromServer(createServerReader());
-        consolePrinter.print(message);
+        consolePrinter.print(readFromServer(createServerReader()));
     }
 
     public void sendToServer(PrintWriter serverWriter, String userInput) {
         serverWriter.println(userInput);
     }
 
-    private void disconnectClient() {
+    private String readFromStream(BufferedReader bufferedReader) {
+        try {
+            return bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private void disconnectClient(PrintWriter serverWriter) {
+        sendToServer(serverWriter, "stop");
         echoSocket.close();
     }
 
     private String readFromServer(BufferedReader serverReader) {
-        try {
-            return serverReader.readLine();
-        } catch (IOException e) {
-            System.out.println("can't read from server");
-            e.printStackTrace();
-        }
-        return null;
+        return readFromStream(serverReader);
     }
 
     private BufferedReader createBufferedConsoleReader() {
