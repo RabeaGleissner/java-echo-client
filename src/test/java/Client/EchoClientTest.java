@@ -1,3 +1,8 @@
+package Client;
+
+import Console.FakeConsolePrinter;
+import Console.FakeConsoleReader;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.PrintWriter;
@@ -29,7 +34,7 @@ public class EchoClientTest {
 
         echoClient.sendToServer(new PrintWriter(fakeSocket.getOutputStream(), true), "hello");
 
-        assertEquals("hello\n", fakeSocket.printedMessage());
+        Assert.assertEquals("hello\n", fakeSocket.printedMessage());
     }
 
     @Test

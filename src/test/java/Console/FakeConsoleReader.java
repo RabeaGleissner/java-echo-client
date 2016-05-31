@@ -1,3 +1,7 @@
+package Console;
+
+import Client.ConsoleReader;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;

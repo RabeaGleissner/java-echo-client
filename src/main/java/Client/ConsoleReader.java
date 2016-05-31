@@ -1,3 +1,5 @@
+package Client;
+
 import java.io.InputStream;
 
 public interface ConsoleReader {

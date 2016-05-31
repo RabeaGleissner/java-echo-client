@@ -1,3 +1,7 @@
+package Console;
+
+import Client.ConsolePrinter;
+
 public class FakeConsolePrinter implements ConsolePrinter {
 
     private String printed;

@@ -1,3 +1,8 @@
+import Client.EchoClient;
+import Client.EchoSocket;
+import Console.EchoConsolePrinter;
+import Console.EchoConsoleReader;
+
 import java.io.IOException;
 import java.net.Socket;
 
