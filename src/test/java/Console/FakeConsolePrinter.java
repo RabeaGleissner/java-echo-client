@@ -8,7 +8,7 @@ import java.util.List;
 public class FakeConsolePrinter implements ConsolePrinter {
 
     private String printed;
-    private List<String> messages = new LinkedList<>();
+    private final List<String> messages = new LinkedList<>();
 
     @Override
     public void print(String message) {

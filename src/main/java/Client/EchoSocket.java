@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class EchoSocket {
 
-    private Socket socket;
+    private final Socket socket;
 
     public EchoSocket(Socket socket) {
         this.socket = socket;

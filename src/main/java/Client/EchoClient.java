@@ -9,7 +9,7 @@ public class EchoClient {
 
     private final ConsolePrinter consolePrinter;
     private final ConsoleReader consoleReader;
-    private EchoSocket echoSocket;
+    private final EchoSocket echoSocket;
 
     public EchoClient(EchoSocket echoSocket, ConsolePrinter consolePrinter,
                       ConsoleReader consoleReader) {
