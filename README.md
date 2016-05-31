@@ -1,6 +1,6 @@
 # Echo Client 
 
-This client needs to be run together with the [Echo Server](https://github.com/RabeaGleissner/java-echo-server).
+This client is meant to be run together with the [Echo Server](https://github.com/RabeaGleissner/java-echo-server).
 
 ## Start the server first
 
@@ -25,8 +25,6 @@ Once the client is running, you can type anything into the console and it will b
 ## Commands you can use
 
 `#quit` -- disconnects the client
-
-#### Not yet implemented
 
 `#reverse` -- reverse mode - echoes back what you typed in reverse
 
